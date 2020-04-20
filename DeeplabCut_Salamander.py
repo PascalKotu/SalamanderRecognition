@@ -18,6 +18,4 @@ print(path_config_file)
 
 #deeplabcut.evaluate_network(path_config_file, plotting=True)
 
-deeplabcut.analyze_videos(path_config_file,['Small_Salamander/Video/Salamander_Video.avi'], videotype='.avi', save_as_csv=True)
 
-#deeplabcut.create_labeled_video(path_config_file,['D:/Pycharm_Projects/TryDeepLabCut/Small_Salamander/Video/Salamander_Video.avi'], save_frames=True)
