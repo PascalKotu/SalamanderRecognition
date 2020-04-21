@@ -1,10 +1,10 @@
 import deeplabcut
 task = 'Salamander'
-experimenter = 'Brijesh'
-video = ['videos/reachingvideo1.avi']
+experimenter = 'Pascal'
+video = ['DummyVideo.avi']
 
 #path_config_file = deeplabcut.create_new_project(task,experimenter,video,copy_videos=True)
-path_config_file = 'D:/Pycharm_Projects/TryDeepLabCut/Salamander-Brijesh-2020-04-18/config.yaml'
+path_config_file = 'C:/Users/iTTaste/Desktop/project/SalamanderRecognition/Salamander-Pascal-2020-04-20/config.yaml'
 print(path_config_file)
 
 #deeplabcut.extract_frames(path_config_file)
@@ -18,6 +18,6 @@ print(path_config_file)
 
 #deeplabcut.evaluate_network(path_config_file, plotting=True)
 
-#deeplabcut.analyze_videos(path_config_file,['Small_Salamander/Video/Salamander_Video.avi'], videotype='.avi', save_as_csv=True)
+#deeplabcut.analyze_videos(path_config_file,['video/Salamander_Video.avi'], videotype='.avi', save_as_csv=True)
 
-deeplabcut.create_labeled_video(path_config_file,['D:/Pycharm_Projects/TryDeepLabCut/Small_Salamander/Video/Salamander_Video.avi'], save_frames=True)
+deeplabcut.create_labeled_video(path_config_file,['C:/Users/iTTaste/Desktop/project/SalamanderRecognition/video/Salamander_Video.avi'], save_frames=True)

@@ -3,7 +3,7 @@ from glob import glob
 import os
 from skimage import exposure
 
-source = 'Feuersalamander_Frames/*.jpg'
+source = 'Salamander-Pascal-2020-04-20/labeled-data/DummyVideo/*.jpg'
 size = (512,512)
 
 for file in glob(source):
@@ -16,6 +16,5 @@ for file in glob(source):
     #cv2.imshow('Equalized Alpha', eq_img)
     #cv2.waitKey()
     destination =  'Small_Salamander/' + os.path.splitext(os.path.basename(file))[0] + '_small.png'
-    #print(destination)
+    print(destination)
     cv2.imwrite(destination, eq_img)
-

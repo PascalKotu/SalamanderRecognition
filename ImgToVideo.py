@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from glob import glob
 
-source = 'Small_Salamander/*.png'
+source = 'salamanderpics/*.png'
 img_array = []
 #size = ()
 
@@ -12,7 +12,7 @@ for file in glob(source):
     size = (width,height)
     img_array.append(img)
 
-out = cv2.VideoWriter('Small_Salamander/Video/Salamander_Video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
+out = cv2.VideoWriter('Salamander_Video.avi',cv2.VideoWriter_fourcc(*'DIVX'), 15, size)
 
 for i in range(len(img_array)):
     out.write(img_array[i])
