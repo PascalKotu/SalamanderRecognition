@@ -105,7 +105,6 @@ def show_points(image, preds):
     plt.axis('off')
     plt.ioff()
     plt.savefig('Results/' + os.path.basename(file))  # Save the figure
-    plt.show()
 
 
 # Crate an instance of the Densenet
@@ -140,14 +139,12 @@ with open(filename, 'w') as csvfile:
         dsample = scale(dsample)
         # Create a ToTensor object
         tensor = ToTensor()
-        # Canvert the sample to Tensor
         dsample = tensor(dsample)
 
         # Get the image from the sample
         image = dsample['image']
         # Pass the image through the network to obtain the predicted belly_points
         preds = test_network(image.unsqueeze(0).float())
-        # Reshapeing the predictions for convenience
         predicted_points = preds.reshape(-1, 2)
 
         # Display the predicted belly_points on the image
