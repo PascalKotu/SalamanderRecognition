@@ -119,6 +119,7 @@ for i, sample in enumerate(saladataset):
 
     plt.figure()
     plt.imshow(sampled_img)
+    plt.axis('off')
     plt.savefig('Results/belly' + str(i) + '.png')  # Save the figure
     plt.show()
     
