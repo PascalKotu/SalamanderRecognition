@@ -60,6 +60,7 @@ num_samples = 500
 perc_width = 0.8
 
 saladataset = SalaDataset(csv_file='Results/labelled_belly_points.csv')
+saladataset = SalaDataset(csv_file='Data/CollectedData_Brijesh.csv')
 
 for i, sample in enumerate(saladataset):
     # Get imput image and belly points
@@ -70,6 +71,7 @@ for i, sample in enumerate(saladataset):
     coords = getEquidistantPoints(belly_points, 10)
     # Display salamander with new points
     show_points_known(image, coords)
+    # show_points_known(image, coords)
 
     """ CODE TO PERFORM RECTIFICATION BY PROFESSOR """
 
@@ -116,10 +118,7 @@ for i, sample in enumerate(saladataset):
         for sampled_img_c in range(num_orth_samples):
             sampled_img[sampled_img_r, sampled_img_c, :] = [img_func(*sample_coords[sampled_img_r, sampled_img_c, :])
                                                             for img_func in [img_func_r, img_func_g, img_func_b]]
-
     plt.figure()
     plt.imshow(sampled_img)
     plt.axis('off')
-    plt.savefig('Results/belly' + str(i) + '.png')  # Save the figure
     plt.show()
-    
