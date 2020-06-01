@@ -81,7 +81,6 @@ for i, sample in enumerate(saladataset):
 
     # Plot more points inbetween known belly points
     # coords = getEquidistantPoints(belly_points, 500) # For liner interpolation
-    coords = getEquidistantPointsSmooth(belly_points, 500) # For liner interpolation
     coords = getEquidistantPointsSmooth(belly_points, 500) # For Smooth interpolation
 
     # Display salamander with new points
