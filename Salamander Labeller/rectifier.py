@@ -8,7 +8,6 @@ import math
 from scipy import interpolate
 
 
-
 # Class to read labelled data
 class SalaDataset(Dataset):
 
@@ -67,7 +66,6 @@ for i, sample in enumerate(saladataset):
     image = transform.resize(image, (512, 512))
 
     # Plot more points inbetween known belly points
-    coords = getEquidistantPoints(belly_points, 10)
     # Display salamander with new points
     # show_points_known(image, coords)
 
@@ -121,7 +119,5 @@ for i, sample in enumerate(saladataset):
     plt.figure()
     plt.imshow(sampled_img)
     plt.axis('off')
-    plt.savefig('Belly_Rectified/belly' + str(i) + '.png')  # Save the figure
     plt.show()
     plt.pause(0.05)
-    print("Images Done :", i+1, "/", len(saladataset))
