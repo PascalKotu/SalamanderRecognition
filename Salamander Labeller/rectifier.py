@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from torch.utils.data import Dataset
 import math
 from scipy import interpolate
+from scipy.interpolate import interp1d, InterpolatedUnivariateSpline
+from scipy.signal import savgol_filter
 
 
 # Class to read labelled data
@@ -31,9 +33,11 @@ class SalaDataset(Dataset):
             sample = self.transform(sample)
         return sample
 
+
 # Function to show image of salamander with belly labelled
 def show_points_known(image, belly_points, preds=None):
     image = torch.from_numpy(image.copy())
+    plt.figure()
     plt.imshow(image)
     plt.scatter(belly_points[:, 0], belly_points[:, 1], s=10, marker='+', c='r')
     if preds is not None:
@@ -44,6 +48,7 @@ def show_points_known(image, belly_points, preds=None):
     # plt.savefig('Results/' + os.path.basename(file))  # Save the figure
     plt.show()
 
+
 # Function to perform interpolation
 def getEquidistantPoints(belly_points, parts):
     coords = np.expand_dims(belly_points[0], axis=0)
@@ -52,6 +57,15 @@ def getEquidistantPoints(belly_points, parts):
         y = np.linspace(belly_points[i][1], belly_points[i + 1][1], parts + 1)
         s = np.column_stack((x[1:], y[1:]))
         coords = np.concatenate((coords, s), axis=0)
+    return coords
+
+
+def getEquidistantPointsSmooth(belly_points, parts):
+    distance = np.cumsum(np.sqrt(np.sum(np.diff(belly_points, axis=0) ** 2, axis=1)))
+    distance = np.insert(distance, 0, 0)
+    alpha = np.linspace(distance.min(), int(distance.max()), parts)
+    interpolator = interpolate.interp1d(distance, belly_points, kind='cubic', axis=0)
+    coords = interpolator(alpha)
     return coords
 
 
@@ -66,6 +80,9 @@ for i, sample in enumerate(saladataset):
     image = transform.resize(image, (512, 512))
 
     # Plot more points inbetween known belly points
+    # coords = getEquidistantPoints(belly_points, 500) # For liner interpolation
+    coords = getEquidistantPointsSmooth(belly_points, 500) # For liner interpolation
+
     # Display salamander with new points
     # show_points_known(image, coords)
 
@@ -119,5 +136,7 @@ for i, sample in enumerate(saladataset):
     plt.figure()
     plt.imshow(sampled_img)
     plt.axis('off')
+    plt.savefig('Belly_Rectified_Smooth/belly' + str(i) + '.png')  # Save the figure
     plt.show()
     plt.pause(0.05)
+    print("Images Done :", i + 1, "/", len(saladataset))
